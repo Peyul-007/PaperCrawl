@@ -1,5 +1,5 @@
 import scrapy
-from scispider.items import PdfItem
+from paperspider.items import PdfItem
 
 
 class KddSpider(scrapy.Spider):
@@ -10,7 +10,7 @@ class KddSpider(scrapy.Spider):
     }
     custom_settings = {
         'ITEM_PIPELINES': {
-            "scispider.pipelines.PdfPipeline": 300,
+            "paperspider.pipelines.PdfPipeline": 300,
         },
         'RANDOM_DELAY' : 1
         # 'LOG_LEVEL': 'ERROR'

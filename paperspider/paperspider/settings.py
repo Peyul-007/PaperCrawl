@@ -1,4 +1,4 @@
-# Scrapy settings for scispider project
+# Scrapy settings for paperspider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -10,14 +10,14 @@
 from pathlib import Path
 
 
-BOT_NAME = "scispider"
+BOT_NAME = "paperspider"
 
-SPIDER_MODULES = ["scispider.spiders"]
-NEWSPIDER_MODULE = "scispider.spiders"
+SPIDER_MODULES = ["paperspider.spiders"]
+NEWSPIDER_MODULE = "paperspider.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = "scispider (+http://www.yourdomain.com)"
+# USER_AGENT = "paperspider (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 # ROBOTSTXT_OBEY = True
@@ -48,13 +48,13 @@ NEWSPIDER_MODULE = "scispider.spiders"
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    "scispider.middlewares.ScispiderSpiderMiddleware": 543,
+#    "paperspider.middlewares.PaperspiderSpiderMiddleware": 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    "scispider.middlewares.ScispiderDownloaderMiddleware": 543,
+#    "paperspider.middlewares.PaperspiderDownloaderMiddleware": 543,
 # }
 
 # Enable or disable extensions
@@ -66,7 +66,7 @@ NEWSPIDER_MODULE = "scispider.spiders"
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 # ITEM_PIPELINES = {
-#    "scispider.pipelines.PdfPipeline": 300,
+#    "paperspider.pipelines.PdfPipeline": 300,
 # }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

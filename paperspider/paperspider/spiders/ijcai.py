@@ -1,5 +1,5 @@
 import scrapy
-from scispider.items import PdfItem
+from paperspider.items import PdfItem
 
 
 class IjcaiSpider(scrapy.Spider):
@@ -10,7 +10,7 @@ class IjcaiSpider(scrapy.Spider):
     }
     custom_settings = {
         'ITEM_PIPELINES': {
-            "scispider.pipelines.PdfPipeline": 300,
+            "paperspider.pipelines.PdfPipeline": 300,
         },
         'LOG_LEVEL': 'ERROR'
     }

@@ -1,6 +1,6 @@
 import json
 import scrapy
-from scispider.items import PdfItem
+from paperspider.items import PdfItem
 
 
 class IcmlSpider(scrapy.Spider):
@@ -11,7 +11,7 @@ class IcmlSpider(scrapy.Spider):
     }
     custom_settings = {
         'ITEM_PIPELINES': {
-            "scispider.pipelines.PdfPipeline": 300,
+            "paperspider.pipelines.PdfPipeline": 300,
         },
         'LOG_LEVEL': 'INFO'
     }
