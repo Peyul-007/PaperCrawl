@@ -4,6 +4,8 @@
 # https://docs.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy_djangoitem import DjangoItem
+from crawler.models import Info
 
 
 class PdfItem(scrapy.Item):
@@ -12,9 +14,6 @@ class PdfItem(scrapy.Item):
     file_url = scrapy.Field()
     file_name = scrapy.Field()
 
-class InfoItem(scrapy.Item):
-    file_name = scrapy.Field()
-    author = scrapy.Field()
-    title = scrapy.Field()
-    proceedings = scrapy.Field()
-    abstract = scrapy.Field()
+
+class InfoItem(DjangoItem):
+    django_model = Info

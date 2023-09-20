@@ -7,8 +7,12 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import os
 from pathlib import Path
 
+import django
+
+BASE_DIR = Path(__file__).parent.parent.parent
 
 BOT_NAME = "paperspider"
 
@@ -100,3 +104,4 @@ FEED_EXPORT_ENCODING = "utf-8"
 # DOWNLOAD_MAXSIZE = 0
 MEDIA_ALLOW_REDIRECTS = True
 FILES_STORE = Path(__file__).parent
+NUM_THREADS = 4
