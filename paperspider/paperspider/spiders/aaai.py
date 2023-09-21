@@ -5,8 +5,6 @@ from paperspider.items import InfoItem
 class AaaiSpider(scrapy.Spider):
     name = "aaai"
     start_urls = "https://ojs.aaai.org/index.php/AAAI/issue/archive"
-
-    # start_urls = "https://ojs.aaai.org/index.php/AAAI/issue/view/"
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.69'
     }
@@ -14,7 +12,7 @@ class AaaiSpider(scrapy.Spider):
         'ITEM_PIPELINES': {
             "paperspider.pipelines.InfoPipeline": 300,
         },
-        'LOG_LEVEL': 'ERROR'
+        # 'LOG_LEVEL': 'ERROR'
     }
 
     def start_requests(self):
@@ -24,6 +22,12 @@ class AaaiSpider(scrapy.Spider):
             method="GET",
             headers=self.headers
         )
+        # yield scrapy.Request(
+        #     url="https://ojs.aaai.org/index.php/AAAI/article/view/18836",
+        #     callback=self.parse_info,
+        #     method="GET",
+        #     headers=self.headers
+        # )
 
     def parse_tracks(self, response):
         for track_url in response.xpath('//ul[@class="issues_archive"]/li/div/h2/a/@href').getall():
@@ -40,7 +44,7 @@ class AaaiSpider(scrapy.Spider):
                 method="GET",
                 headers=self.headers
             )
-        
+
     def parse_detail(self, response):
         papers = response.xpath("//ul[@class='cmp_article_list articles']/li")
         for paper in papers:
@@ -51,19 +55,26 @@ class AaaiSpider(scrapy.Spider):
                 headers=self.headers
             )
 
-    def parse_info(self,response):
+    def parse_info(self, response):
         item = InfoItem()
-        item['title'] = response.xpath('//h1[@class="page_title"]/text()').get().strip()
-        item['author'] = response.xpath('//ul[@class="authors"]/li[1]/span[@class="name"]/text()').get().strip()
+        item['title'] = response.xpath(
+            '//h1[@class="page_title"]/text()').get().strip()
+        item['author'] = response.xpath(
+            '//ul[@class="authors"]/li[1]/span[@class="name"]/text()').get().strip()
         if response.xpath('//ul[@class="authors"]/li[1]/span[@class="affiliation"]/text()').get():
-            item['institution'] = response.xpath('//ul[@class="authors"]/li[1]/span[@class="affiliation"]/text()').get().strip()
-        item['year'] = response.xpath('//div[@class="item published"]/section/div[@class="value"]/span/text()').get().strip().split('-')[0]
+            item['institution'] = response.xpath(
+                '//ul[@class="authors"]/li[1]/span[@class="affiliation"]/text()').get().strip()
+        item['year'] = response.xpath(
+            '//div[@class="item published"]/section/div[@class="value"]/span/text()').get().strip().split('-')[0]
         item['journal'] = 'aaai'
-        item['doi'] = response.xpath('//section[@class="item doi"]/span/a/text()').get().strip()
-        if response.xpath('//section[@class="item abstract"]/text()[2]').get():
-            item['abstract'] = response.xpath('//section[@class="item abstract"]/text()[2]').get().strip()
-        item['pdf_url'] = response.xpath('//a[@class="obj_galley_link pdf"]/@href').get()
-        item['track'] = response.xpath('//div[@class="item issue"]/section[2]/div/text()').get().strip()
+        item['doi'] = response.xpath(
+            '//section[@class="item doi"]/span/a/text()').get().strip()
+        i = response.xpath('string(//section[@class="item abstract"])').get().strip().find('Abstract')
+        item['abstract'] = response.xpath('string(//section[@class="item abstract"])').get().strip()[i+8:].strip()
+        item['pdf_url'] = response.xpath(
+            '//a[@class="obj_galley_link pdf"]/@href').get()
+        item['track'] = response.xpath(
+            '//div[@class="item issue"]/section[2]/div/text()').get().strip()
         yield item
 
     def parse_pdf(self, response):
