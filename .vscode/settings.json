@@ -1,6 +1,6 @@
 {
     "python.analysis.extraPaths": [
         "./paperspider",
-        "./backend/mypaper"
+        "./backend/mypaper",
     ],
 }

@@ -97,8 +97,9 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
 # CONCURRENT_REQUESTS = 1
-# DOWNLOAD_TIMEOUT = 36000
+DOWNLOAD_TIMEOUT = 36000
 # DOWNLOAD_MAXSIZE = 0
 MEDIA_ALLOW_REDIRECTS = True
 FILES_STORE = Path(__file__).parent
 NUM_THREADS = 4
+SQLITE_DB_NAME = 'db.sqlite3'

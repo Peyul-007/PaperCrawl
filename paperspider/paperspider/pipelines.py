@@ -32,7 +32,7 @@ class InfoPipeline():
 
 class PdfPipeline(FilesPipeline):
     def get_media_requests(self, item, info):
-        yield scrapy.Request(item['file_url'], meta={"download_timeout": 36000})
+        yield scrapy.Request(item['file_url'], meta={"download_timeout": 36000},dont_filter=True)
 
     def file_path(self, request, response=None, info=None, *, item=None):
         return f"downloads/{item['file_name']}"
