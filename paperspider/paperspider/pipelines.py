@@ -14,7 +14,6 @@ from scrapy.pipelines.files import FilesPipeline
 from concurrent.futures import ThreadPoolExecutor
 
 
-
 class InfoPipeline():
     def __init__(self):
         self.thread_pool = ThreadPoolExecutor(max_workers=NUM_THREADS)
@@ -32,7 +31,8 @@ class InfoPipeline():
 
 class PdfPipeline(FilesPipeline):
     def get_media_requests(self, item, info):
-        yield scrapy.Request(item['file_url'], meta={"download_timeout": 36000},dont_filter=True)
+        print(item['file_url'])
+        yield scrapy.Request(item['file_url'], meta={"download_timeout": 36000}, dont_filter=True)
 
     def file_path(self, request, response=None, info=None, *, item=None):
         return f"downloads/{item['file_name']}"
