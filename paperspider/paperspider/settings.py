@@ -21,7 +21,7 @@ NEWSPIDER_MODULE = "paperspider.spiders"
 # USER_AGENT = "paperspider (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-# ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -101,5 +101,7 @@ DOWNLOAD_TIMEOUT = 36000
 # DOWNLOAD_MAXSIZE = 0
 MEDIA_ALLOW_REDIRECTS = True
 FILES_STORE = Path(__file__).parent
-NUM_THREADS = 4
+NUM_THREADS = 1
 SQLITE_DB_NAME = 'db.sqlite3'
+RANDOM_DELAY = 1,
+DOWNLOAD_DELAY = 4,

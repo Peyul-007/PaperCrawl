@@ -1,7 +1,7 @@
 import json
 import re
 import scrapy
-from paperspider.items import InfoItem
+from paperspider.items import InfoItem, PdfItem
 
 
 class IcmlSpider(scrapy.Spider):

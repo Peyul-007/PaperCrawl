@@ -13,6 +13,7 @@ class PdfItem(scrapy.Item):
     # name = scrapy.Field()
     file_url = scrapy.Field()
     file_name = scrapy.Field()
+    paper_id = scrapy.Field()
 
 
 class InfoItem(DjangoItem):

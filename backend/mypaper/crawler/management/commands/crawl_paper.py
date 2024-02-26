@@ -1,7 +1,7 @@
 from paperspider.spiders.aaai import AaaiSpider
 from paperspider.spiders.ijcai import IjcaiSpider
 from paperspider.spiders.neurips import NeuripsSpider
-from paperspider.spiders.download_pdf import PdfSpider
+from paperspider.spiders.ieee import IeeeSpider
 import os
 import sys
 from django.conf import settings
@@ -13,7 +13,7 @@ sys.path.append(os.path.join(settings.BASE_DIR.parent, "paperspider"))
 
 
 def crawl(process: CrawlerProcess):
-    process.crawl(PdfSpider)
+    process.crawl(IeeeSpider)
     # process.crawl(NeuripsSpider)
     # process.crawl(IjcaiSpider)
     # process.crawl(AaaiSpider)

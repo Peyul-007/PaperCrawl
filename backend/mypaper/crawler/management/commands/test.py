@@ -1,8 +1,9 @@
-from paperspider.spiders.aaai import AaaiSpider
-from paperspider.spiders.ijcai import IjcaiSpider
-from paperspider.spiders.neurips import NeuripsSpider
-from paperspider.spiders.icml import IcmlSpider
-from paperspider.spiders.download_pdf import PdfSpider
+from paperspider.spiders.aaai_pdf import AaaiPdfSpider
+from paperspider.spiders.ijcai_pdf import IjcaiPdfSpider
+from paperspider.spiders.neurips_pdf import NeuripsPdfSpider
+from paperspider.spiders.icml_pdf import IcmlPdfSpider
+from paperspider.spiders.kdd_pdf import KddPdfSpider
+from paperspider.spiders.ieee_pdf import IeeePdfSpider
 import os
 import sys
 from django.conf import settings
@@ -14,18 +15,16 @@ sys.path.append(os.path.join(settings.BASE_DIR.parent, "paperspider"))
 
 
 def crawl(process: CrawlerProcess):
-    process.crawl(IcmlSpider)
-    # process.crawl(PdfSpider)
-    # process.crawl(NeuripsSpider)
-    # process.crawl(IjcaiSpider)
-    # process.crawl(AaaiSpider)
+    process.crawl(IeeePdfSpider)
+    # process.crawl(IcmlPdfSpider)
+    # process.crawl(KddPdfSpider)
+    # process.crawl(NeuripsPdfSpider)
+    # process.crawl(IjcaiPdfSpider)
+    # process.crawl(AaaiPdfSpider)
 
 
 class Command(BaseCommand):
-    help = (
-        "Crawl Fundermental from mysteel and save extracted information in database."
-    )
-
+    
     def handle(self, *args, **kwargs):
         # Set scrapy configuration file
         os.environ.setdefault("SCRAPY_SETTINGS_MODULE", "paperspider.settings")
@@ -33,5 +32,5 @@ class Command(BaseCommand):
         process = CrawlerProcess(settings=scrapy_settings)
         crawl(process)
         process.start()
-        message = f"{timezone.localtime().strftime('%Y-%m-%d %H:%M:%S')} -aaai crawled successfully."
+        message = f"{timezone.localtime().strftime('%Y-%m-%d %H:%M:%S')} crawled successfully."
         self.stdout.write(self.style.SUCCESS(message))
